@@ -1,12 +1,10 @@
 import { Table, Card, Flex, Text, Checkbox, TextField } from "@radix-ui/themes";
-import { capitalCase } from "../util";
+import { capitalCase, snakeCase } from "change-case"
 import { useState } from "react";
 import { Search } from "lucide-react";
-import { itemListAtom } from "../util";
+import { itemListAtom, convertToRawMaterials } from "../util";
 import { useAtom } from "jotai";
 import { csvParse } from "d3-dsv";
-import { convertToRawMaterials } from "../util";
-import slugify from "slugify";
 
 export function RecipeList() {
   const [query, setQuery] = useState("");
@@ -44,18 +42,14 @@ export function RecipeList() {
           <Table.Body>
             {matsList
               .filter(item =>
-                item.item.includes(
-                  slugify(query, { replacement: "_", lower: true })
-                )
+                item.item.includes(snakeCase(query))
               )
               .map(item => (
                 <Table.Row key={item["Item"]}>
                   <Table.RowHeaderCell align="center">
-                  {capitalCase(item.item)}
+                    {capitalCase(item.item)}
                   </Table.RowHeaderCell>
-                  <Table.Cell align="center">
-                    {item.quantity}
-                  </Table.Cell>
+                  <Table.Cell align="center">{item.quantity}</Table.Cell>
                   <Table.Cell align="center">
                     <Checkbox />
                   </Table.Cell>

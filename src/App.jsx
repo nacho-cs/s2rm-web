@@ -2,6 +2,7 @@ import { Flex, Container } from "@radix-ui/themes";
 import { Navbar } from "./components/Navbar";
 import { RecipeList } from "./components/RecipeList";
 import { UploadCSV } from "./components/UploadCSV";
+import { Footer } from "./components/Footer";
 
 export function App() {
   return (
@@ -10,6 +11,7 @@ export function App() {
         <Navbar />
         <UploadCSV />
         <RecipeList />
+        <Footer />
       </Flex>
     </Container>
   );

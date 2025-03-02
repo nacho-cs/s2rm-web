@@ -54,11 +54,11 @@ export function FileInput() {
 
   return (
     <Theme>
-      <Box>
+      <Box style={{ textAlign: "center" }}>
         <Box
           {...getRootProps()}
           style={{
-            padding: "20px",
+            padding: "24px",
             borderWidth: "2px",
             borderRadius: "2px",
             borderColor: isDragActive ? activeColor : baseSlate.slate6,
@@ -67,7 +67,6 @@ export function FileInput() {
             color: textColor,
             outline: "none",
             cursor: "pointer",
-            textAlign: "center",
           }}>
           <input {...getInputProps()} />
           {isDragActive ? (
