@@ -3,6 +3,7 @@ import { useDropzone } from "react-dropzone";
 import { Theme, Box, Text } from "@radix-ui/themes";
 import { itemListAtom } from "../util";
 import { useAtom } from "jotai";
+import { csvParse } from "d3-dsv";
 
 export function FileInput() {
   const [fileName, setFileName] = useState("");
@@ -15,7 +16,7 @@ export function FileInput() {
 
     setFileName(file.name);
     reader.onload = e => {
-      setItemList(e.target.result);
+      setItemList(csvParse(e.target.result));
     };
     reader.onerror = err => {
       setFileError(`Error: ${err}`);
