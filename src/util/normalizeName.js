@@ -2,7 +2,6 @@ const replacements = {
   "Redstone Comparator": "Comparator",
   "Redstone Repeater": "Repeater",
   "Redstone Dust": "Redstone",
-  "Deepslate Lapis Lazuli Ore": "Deepslate Lapis Ore",
   "Smooth Quartz Block": "Smooth Quartz",
   "Jack o'Lantern": "Jack O Lantern",
   Vines: "Vine",
@@ -17,13 +16,30 @@ const replacements = {
   "Watermelon Seeds": "Melon Seeds",
   "Ender Dragon Head": "Dragon Head",
 };
-const regex = /Block of (\w+)/;
+
+function clean(str) {
+  const noControlChars = Array.from(str)
+    .filter(c => {
+      const charCode = c.charCodeAt(0);
+      return !(
+        (charCode >= 0 && charCode <= 31) ||
+        (charCode >= 127 && charCode <= 159)
+      );
+    })
+    .join("");
+  return noControlChars.replace(/[^a-zA-Z'\s].*/, "");
+}
 
 export function normalizeName(str) {
-  if (regex.test(str)) {
-    return str.replace(regex, "$1 Block");
-  } else if (Object.keys(replacements).includes(str)) {
-    return replacements[str];
+  str = clean(str);
+  str = str
+    .replace(/Lapis Lazuli/gi, "Lapis ")
+    .replace(/chiselled/gi, "chiseled")
+    .replace(/grey/gi, "gray")
+    .replace(/dised/gi, "dized")
+    .replace(/Block of (\w+ \w+|\w+)/gi, "$1 Block");
+  if (Object.keys(replacements).includes(str)) {
+    str = replacements[str];
   }
   return str;
 }

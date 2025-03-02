@@ -6,6 +6,7 @@ import { normalizeName } from "./normalizeName";
 export function convertToRawMaterials(json) {
   const list = [];
   for (const item of json) {
+    console.log(snakeCase(normalizeName(item["Item"])));
     const amounts = rawMaterials[snakeCase(normalizeName(item["Item"]))];
     amounts.forEach(amount => {
       if (!list.map(item => item.item).includes(amount.item)) {
