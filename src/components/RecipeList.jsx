@@ -1,6 +1,6 @@
 import { Table, Card, Flex, Text, Checkbox, TextField } from "@radix-ui/themes";
-import { capitalCase, snakeCase } from "change-case"
-import { useState } from "react";
+import { capitalCase, snakeCase } from "change-case";
+import { useState } from "preact/compat";
 import { Search } from "lucide-react";
 import { itemListAtom, convertToRawMaterials } from "../util";
 import { useAtom } from "jotai";
@@ -41,9 +41,7 @@ export function RecipeList() {
 
           <Table.Body>
             {matsList
-              .filter(item =>
-                item.item.includes(snakeCase(query))
-              )
+              .filter(item => item.item.includes(snakeCase(query)))
               .map(item => (
                 <Table.Row key={item["Item"]}>
                   <Table.RowHeaderCell align="center">

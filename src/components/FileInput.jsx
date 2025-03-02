@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "preact/compat";
 import { useDropzone } from "react-dropzone";
 import { Theme, Box, Text } from "@radix-ui/themes";
 import { itemListAtom } from "../util";
