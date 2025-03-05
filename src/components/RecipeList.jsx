@@ -68,8 +68,8 @@ export function RecipeList() {
                             placeholder="0"
                             defaultValue={item["Missing"] - item["Total"]}
                             onBlur={e => {
-                              if (Number(e.target.value) > item["Total"]) {
-                                e.target.value = item["Total"];
+                              if (Number(e.target.value) > item["Missing"]) {
+                                e.target.value = item["Missing"];
                               }
                               if (
                                 Number(e.target.value) < 0 ||
